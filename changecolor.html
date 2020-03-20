@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>网页换肤</title>
+    <style>
+        legend {
+            color: red;
+            font-weight: 700;
+            font-size: xx-large;
+        }
+        
+        fieldset {
+            width: 800px;
+            height: 300px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+        
+        .div {
+            border: 1px solid rgb(172, 169, 169);
+            margin-top: 50px;
+            height: 80px;
+        }
+        
+        .wenben {
+            border: 1px solid rgb(172, 169, 169);
+            font-size: 25px;
+            margin-top: 30px;
+        }
+        
+        li {
+            margin: 0 auto;
+            width: 40px;
+            height: 40px;
+            float: left;
+            margin-left: 15px;
+            border: 1px solid gray;
+            list-style: none;
+        }
+        
+        .red {
+            background-color: red;
+        }
+        
+        .orange {
+            background-color: orange;
+        }
+        
+        .yellow {
+            background-color: yellow;
+        }
+        
+        .green {
+            background-color: green;
+        }
+        
+        .blue {
+            background-color: blue;
+        }
+        
+        .purple {
+            background-color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <legend>网页换肤</legend>
+        <div class="div">
+            <ul>
+                <li class="red" id="red" title="红色"></li>
+                <li class="orange" id="orange" title="橙色"></li>
+                <li class="yellow" id="yellow" title="黄色"></li>
+                <li class="green" id="green" title="绿色"></li>
+                <li class="blue" id="blue" title="蓝色"></li>
+                <li class="purple" id="purple" title="紫色"></li>
+            </ul>
+        </div>
+        <div class="wenben" id="wenben">LocalStorage将数据保存在客户端本地的硬件设备中，及时浏览器关闭了，该数据仍然存在，下次打开浏览 器访问网站是仍然可以继续使用。</div>
+    </fieldset>
+</body>
+<script>
+    var colorvalue = window.localStorage.localColor;
+    var wenben = document.getElementById("wenben");
+    var red = document.getElementById("red");
+    var orange = document.getElementById("orange");
+    var yellow = document.getElementById("yellow");
+    var green = document.getElementById("green");
+    var blue = document.getElementById("blue");
+    var purple = document.getElementById("purple");
+    if (colorvalue) {
+        wenben.style.backgroundColor = colorvalue;
+    }
+    if (localStorage.pagecount) {
+        localStorage.pagecount = Number(localStorage.pagecount) + 1;
+    } else {
+        localStorage.pagecount = 1;
+        wenben.style.backgroundcolor = "red";
+        localStorage.setItem('localColor', 'red');
+    }
+    var li = document.getElementsByTagName("li");
+    for (var i = 0; i < li.length; i++) {
+        if (li[i].id == localStorage.getItem.localColor) {
+            li[i].style.marginTop = "-15px";
+        }
+    }
+    for (var i = 0; i < li.length; i++) {
+        li[i].onclick = function() {
+            var color = this.id;
+            window.localStorage.setItem('localColor', color);
+            var color0 = window.localStorage.getItem("localColor");
+            wenben.style.backgroundColor = color0;
+            for (j = 0; j < li.length; j++) {
+                li[j].style.marginTop = "0px";
+            }
+            this.style.marginTop = "-15px";
+        }
+    }
+</script>
+
+</html>
